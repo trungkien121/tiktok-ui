@@ -33,6 +33,7 @@ import images from '@/assets/images';
 import AccountItem from '@/components/AccountItem';
 import Menu from '@/components/Popper/Menu';
 import { faTiktok } from '@fortawesome/free-brands-svg-icons';
+import Image from '@/components/Image';
 
 const cx = classNames.bind(styles);
 
@@ -119,15 +120,51 @@ function Header() {
         },
         {
             icon: <FontAwesomeIcon icon={faVideo} />,
-            title: 'video',
+            title: 'LIVE Studio',
             to: '/coins',
+        },
+        {
+            icon: <FontAwesomeIcon icon={faLightbulb} />,
+            title: 'LIVE Creator Hub',
+            to: '/creator',
         },
         {
             icon: <FontAwesomeIcon icon={faSun} />,
             title: 'Settings',
             to: '/settings',
         },
-        ...MENU_ITEMS,
+        {
+            icon: <FontAwesomeIcon icon={faEarthAsia} />,
+            title: 'English',
+            children: {
+                title: 'Language',
+                data: [
+                    {
+                        type: 'language',
+                        code: 'en',
+                        title: 'English',
+                    },
+                    {
+                        type: 'language',
+                        code: 'vi',
+                        title: 'Tiếng Việt',
+                    },
+                ],
+            },
+        },
+        {
+            icon: <FontAwesomeIcon icon={faCircleQuestion} />,
+            title: 'Feedback and help',
+            to: '/feedback',
+        },
+        {
+            icon: <FontAwesomeIcon icon={faKeyboard} />,
+            title: 'Keyboard shortcuts',
+        },
+        {
+            icon: <FontAwesomeIcon icon={faMoon} />,
+            title: 'Dark more',
+        },
         {
             icon: <FontAwesomeIcon icon={faArrowRightToBracket} />,
             title: 'Log out',
@@ -202,7 +239,7 @@ function Header() {
                     )}
                     <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
                         {currentUser ? (
-                            <img
+                            <Image
                                 className={cx('user-avatar')}
                                 src="https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/140fc7d5f01e40a37fe761f4da3d856d~c5_300x300.webp?lk3s=a5d48078&nonce=99750&refresh_token=e17371909b66484d63fd71e5c69bd3d1&x-expires=1720083600&x-signature=cueGaNmi0owxZppNu%2Bp5z6la9jM%3D&shp=a5d48078&shcp=c1333099"
                                 alt="nguyen van a"

@@ -19,6 +19,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css'; // optional
+import { Link } from 'react-router-dom';
 
 import Button from '@/components/Button';
 import styles from './Header.module.scss';
@@ -27,6 +28,7 @@ import Menu from '@/components/Popper/Menu';
 import { faTiktok } from '@fortawesome/free-brands-svg-icons';
 import Image from '@/components/Image';
 import Search from '../Search';
+import { default as routesConfig } from '@/config/routes';
 
 const cx = classNames.bind(styles);
 
@@ -50,7 +52,12 @@ const MENU_ITEMS = [
                 {
                     type: 'language',
                     code: 'vi',
-                    title: 'Tiếng Việt',
+                    title: 'Tiếng Việt 1',
+                },
+                {
+                    type: 'language',
+                    code: 'ja',
+                    title: 'Japan',
                 },
             ],
         },
@@ -164,7 +171,9 @@ function Header() {
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
                 <div className={cx('logo')}>
-                    <img src={images.logo} alt="tiktok" />
+                    <Link to={routesConfig.home} className={cx('link-logo')}>
+                        <img src={images.logo} alt="tiktok" />
+                    </Link>
                 </div>
 
                 {/* Search */}
@@ -205,7 +214,7 @@ function Header() {
                         {currentUser ? (
                             <Image
                                 className={cx('user-avatar')}
-                                src="https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/140fc7d5f01e40a37fe761f4da3d856d~c5_300x300.webp?lk3s=a5d48078&nonce=99750&refresh_token=e17371909b66484d63fd71e5c69bd3d1&x-expires=1720083600&x-signature=cueGaNmi0owxZppNu%2Bp5z6la9jM%3D&shp=a5d48078&shcp=c1333099"
+                                src="https://files.fullstack.edu.vn/f8-tiktok/users/5920/66261d1932d6b.jpg "
                                 alt="nguyen van a"
                             />
                         ) : (

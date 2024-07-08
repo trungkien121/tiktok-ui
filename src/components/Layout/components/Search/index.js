@@ -50,44 +50,57 @@ function Search() {
     const handleHideResult = () => {
         setShowResult(false);
     };
-    return (
-        <HeadlessTippy
-            visible={showResult && searchResult.length > 0}
-            interactive
-            render={(attrs) => (
-                <div className={cx('search-result')} tabIndex="-1" {...attrs}>
-                    <PopperWrapper>
-                        <h3 className={cx('search-title')}>Accounts</h3>
-                        {searchResult.map((result) => (
-                            <AccountItem key={result.id} data={result} />
-                        ))}
-                    </PopperWrapper>
-                </div>
-            )}
-            onClickOutside={handleHideResult}
-        >
-            <div className={cx('search')}>
-                <input
-                    onFocus={() => setShowResult(true)}
-                    ref={inputRef}
-                    value={searchValue}
-                    placeholder="Search accounts and videos"
-                    spellCheck={false}
-                    onChange={(e) => setSearchValue(e.target.value)}
-                />
-                {!!searchValue && !loading && (
-                    <button className={cx('clear-btn')} onClick={handleCleaar}>
-                        <FontAwesomeIcon icon={faCircleXmark} />
-                    </button>
-                )}
 
-                {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
-                <span className={cx('span')}></span>
-                <button className={cx('search-btn')}>
-                    <SearchIcon />
-                </button>
-            </div>
-        </HeadlessTippy>
+    const handleChange = (e) => {
+        const searchValue = e.target.value;
+        if (searchValue.startsWith(' ')) {
+            return;
+        }
+        setSearchValue(searchValue);
+    };
+
+    return (
+        //Using a wrapper <div> or <span> tag around the reference element solves
+        //this by creating a new parentNode context.
+        <div>
+            <HeadlessTippy
+                visible={showResult && searchResult.length > 0}
+                interactive
+                render={(attrs) => (
+                    <div className={cx('search-result')} tabIndex="-1" {...attrs}>
+                        <PopperWrapper>
+                            <h3 className={cx('search-title')}>Accounts</h3>
+                            {searchResult.map((result) => (
+                                <AccountItem key={result.id} data={result} />
+                            ))}
+                        </PopperWrapper>
+                    </div>
+                )}
+                onClickOutside={handleHideResult}
+            >
+                <div className={cx('search')}>
+                    <input
+                        onFocus={() => setShowResult(true)}
+                        ref={inputRef}
+                        value={searchValue}
+                        placeholder="Search accounts and videos"
+                        spellCheck={false}
+                        onChange={handleChange}
+                    />
+                    {!!searchValue && !loading && (
+                        <button className={cx('clear-btn')} onClick={handleCleaar}>
+                            <FontAwesomeIcon icon={faCircleXmark} />
+                        </button>
+                    )}
+
+                    {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
+                    <span className={cx('span')}></span>
+                    <button className={cx('search-btn')}>
+                        <SearchIcon />
+                    </button>
+                </div>
+            </HeadlessTippy>
+        </div>
     );
 }
 
